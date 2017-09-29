@@ -20,7 +20,7 @@
 {
     CGRect textRect = [super placeholderRectForBounds:bounds];
     
-    if (!self.editing) {
+    if (!(self.editing || self.text.length || self.attributedText.length)) {
         CGFloat width = [self.attributedPlaceholder boundingRectWithSize:bounds.size options:NSStringDrawingUsesFontLeading context:nil].size.width;
         textRect.origin.x = (bounds.size.width - width) / 2;
     }
@@ -32,7 +32,7 @@
 {
     CGRect viewRect = [super leftViewRectForBounds:bounds];
     
-    if (!self.editing) {
+    if (!(self.editing || self.text.length || self.attributedText.length)) {
         CGFloat width = [self.attributedPlaceholder boundingRectWithSize:bounds.size options:NSStringDrawingUsesFontLeading context:nil].size.width;
         viewRect.origin.x = (bounds.size.width - width) / 2 - viewRect.size.width;
     }
@@ -152,8 +152,6 @@ static const float iOS7SearchBarDefaultHeight = 44.f;
 #pragma mark - button action
 -(void)cancelButtonTouched
 {
-    _textField.text = @"";
-    [_textField resignFirstResponder];
     if ([self.delegate respondsToSelector:@selector(lf_iOS7SearchBarCancelButtonClicked:)])
     {
         [self.delegate lf_iOS7SearchBarCancelButtonClicked:self];
@@ -233,20 +231,23 @@ static const float iOS7SearchBarDefaultHeight = 44.f;
 
 - (void)setShowsCancelButton:(BOOL)showsCancelButton animated:(BOOL)animated
 {
-    if (showsCancelButton) {
-        [UIView animateWithDuration:(animated ? 0.25f : 0) animations:^{
-            _cancelButton.hidden = NO;
-            CGRect tempRect = _textField.frame;
-            tempRect.size.width -= CGRectGetWidth(_cancelButton.frame);
-            _textField.frame = tempRect;
-        }];
-    } else {
-        [UIView animateWithDuration:(animated ? 0.25f : 0) animations:^{
-            _cancelButton.hidden = YES;
-            CGRect tempRect = _textField.frame;
-            tempRect.size.width = self.frame.size.width-iOS7SearchBarViewMargin*2;
-            _textField.frame = tempRect;
-        }];
+    if (_showsCancelButton != showsCancelButton) {
+        _showsCancelButton = showsCancelButton;
+        if (showsCancelButton) {
+            [UIView animateWithDuration:(animated ? 0.25f : 0) animations:^{
+                _cancelButton.hidden = NO;
+                CGRect tempRect = _textField.frame;
+                tempRect.size.width -= CGRectGetWidth(_cancelButton.frame);
+                _textField.frame = tempRect;
+            }];
+        } else {
+            [UIView animateWithDuration:(animated ? 0.25f : 0) animations:^{
+                _cancelButton.hidden = YES;
+                CGRect tempRect = _textField.frame;
+                tempRect.size.width = self.frame.size.width-iOS7SearchBarViewMargin*2;
+                _textField.frame = tempRect;
+            }];
+        }
     }
 }
 
@@ -257,15 +258,6 @@ static const float iOS7SearchBarDefaultHeight = 44.f;
 - (UIColor *)tintColor
 {
     return self.textField.backgroundColor;
-}
-
-- (void)setBarTintColor:(UIColor *)barTintColor
-{
-    self.backgroundColor = barTintColor;
-}
-- (UIColor *)barTintColor
-{
-    return self.backgroundColor;
 }
 
 - (void)setIconImage:(UIImage *)iconImage
@@ -316,6 +308,32 @@ static const float iOS7SearchBarDefaultHeight = 44.f;
 -(void)setInputAccessoryView:(UIView *)inputAccessoryView{
     _inputAccessoryView = inputAccessoryView;
     _textField.inputAccessoryView = inputAccessoryView;
+}
+
+#pragma mark - overwrite
+- (BOOL)canBecomeFirstResponder
+{
+    return [self.textField canBecomeFirstResponder];
+}
+
+- (BOOL)becomeFirstResponder
+{
+    return [self.textField becomeFirstResponder];
+}
+
+- (BOOL)canResignFirstResponder
+{
+    return [self.textField canResignFirstResponder];
+}
+
+- (BOOL)resignFirstResponder
+{
+    return [self.textField resignFirstResponder];
+}
+
+- (BOOL)isFirstResponder
+{
+    return [self.textField isFirstResponder];
 }
 
 @end

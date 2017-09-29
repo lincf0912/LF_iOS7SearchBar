@@ -24,6 +24,7 @@
     searchBar.placeholder = @"搜索";
     searchBar.delegate = self;
 //    [searchBar setShowsCancelButton:YES animated:YES];
+    [searchBar becomeFirstResponder];
     [self.view addSubview:searchBar];
 }
 
@@ -35,6 +36,18 @@
 
 - (void)lf_iOS7SearchBarTextDidEndEditing:(LF_iOS7SearchBar *)searchBar
 {
+    
+}
+
+- (void)lf_iOS7SearchBarSearchButtonClicked:(LF_iOS7SearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+}
+
+- (void)lf_iOS7SearchBarCancelButtonClicked:(LF_iOS7SearchBar *)searchBar
+{
+    searchBar.text = nil;
+    [searchBar resignFirstResponder];
     [searchBar setShowsCancelButton:NO animated:YES];
 }
 

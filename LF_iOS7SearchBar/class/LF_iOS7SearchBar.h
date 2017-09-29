@@ -28,13 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setShowsCancelButton:(BOOL)showsCancelButton animated:(BOOL)animated;
 
-/*
- The behavior of tintColor for bars has changed on iOS 7.0. It no longer affects the bar's background
- and behaves as described for the tintColor property added to UIView.
- To tint the bar's background, please use -barTintColor.
- */
 @property(null_resettable, nonatomic,strong) UIColor *tintColor;
-@property(nullable, nonatomic,strong) UIColor *barTintColor;
 
 /* Allow placement of an input accessory view to the keyboard for the search bar
  */
