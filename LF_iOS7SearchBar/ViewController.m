@@ -21,11 +21,20 @@
     
     /** code */
     LF_iOS7SearchBar *searchBar = [[LF_iOS7SearchBar alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 44.f)];
+    searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth |UIViewAutoresizingFlexibleHeight;
     searchBar.placeholder = @"搜索";
     searchBar.delegate = self;
 //    [searchBar setShowsCancelButton:YES animated:YES];
     [searchBar becomeFirstResponder];
     [self.view addSubview:searchBar];
+    
+    LF_iOS7SearchBar *navi_searchBar = [[LF_iOS7SearchBar alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 44.f)];
+    navi_searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth |UIViewAutoresizingFlexibleHeight;
+    navi_searchBar.placeholder = @"搜索";
+    navi_searchBar.delegate = self;
+//    navi_searchBar.backgroundColor = [UIColor clearColor];
+    self.navigationItem.titleView = navi_searchBar;
+    
 }
 
 - (BOOL)lf_iOS7SearchBarShouldBeginEditing:(LF_iOS7SearchBar *)searchBar

@@ -42,9 +42,10 @@
 
 @end
 
-static const float iOS7SearchBarDefaultHeight = 44.f;
+static const float iOS7SearchBarDefaultHeight_V = 44.f;
+static const float iOS7SearchBarDefaultHeight_H = 32.f;
+
 #define iOS7SearchBarViewMargin 7.f
-#define iOS7SearchBarContentHeight 30
 #define iOS7SearchBarBundleImageNamed(name) [UIImage imageNamed:[NSString stringWithFormat:@"LF_iOS7SearchBar.bundle/%@", name]]
 
 
@@ -60,7 +61,7 @@ static const float iOS7SearchBarDefaultHeight = 44.f;
 
 - (instancetype)init
 {
-    return [self initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, iOS7SearchBarDefaultHeight)];
+    return [self initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 0)];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -83,16 +84,37 @@ static const float iOS7SearchBarDefaultHeight = 44.f;
 
 - (void)setFrame:(CGRect)frame
 {
-    [super setFrame:CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, iOS7SearchBarDefaultHeight)];
+    if (frame.size.height > iOS7SearchBarDefaultHeight_V || frame.size.height < iOS7SearchBarDefaultHeight_H) {
+        [super setFrame:CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, iOS7SearchBarDefaultHeight_V)];
+    } else {
+        [super setFrame:frame];
+    }
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    /** 适配上下间距计算 */
+    CGFloat margin = iOS7SearchBarViewMargin - (iOS7SearchBarDefaultHeight_V - iOS7SearchBarDefaultHeight_H)/2 + (self.frame.size.height - iOS7SearchBarDefaultHeight_H)/2;
+    
+    if (_cancelButton) {
+        CGFloat width = [_cancelButton.titleLabel.text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:_cancelButton.titleLabel.font} context:nil].size.width + iOS7SearchBarViewMargin * 2;
+        _cancelButton.frame = CGRectMake(self.frame.size.width-width, margin, width, self.frame.size.height - margin * 2);
+    }
+    if (_textField) {
+        _textField.frame = CGRectMake(iOS7SearchBarViewMargin, margin, self.frame.size.width-iOS7SearchBarViewMargin*2 - (self.showsCancelButton ? CGRectGetWidth(_cancelButton.frame) : 0), self.frame.size.height - margin * 2);
+    }
 }
 
 -(void)buidView{
+    
     _cancelButton = ({
         UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
         NSString *title = @"取消";
         UIFont *font = [UIFont systemFontOfSize:16.0f];
         CGFloat width = [title boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:font} context:nil].size.width + iOS7SearchBarViewMargin * 2;
-        cancelButton.frame = CGRectMake(self.frame.size.width-width, iOS7SearchBarViewMargin, width, iOS7SearchBarContentHeight);
+        cancelButton.frame = CGRectMake(self.frame.size.width-width, iOS7SearchBarViewMargin, width, self.frame.size.height - iOS7SearchBarViewMargin * 2);
         cancelButton.titleLabel.font = font;
         [cancelButton addTarget:self
                          action:@selector(cancelButtonTouched)
@@ -109,7 +131,7 @@ static const float iOS7SearchBarDefaultHeight = 44.f;
     
     
     _textField = ({
-        LF_iOS7SearchBarTextField *textField = [[LF_iOS7SearchBarTextField alloc] initWithFrame:CGRectMake(iOS7SearchBarViewMargin, iOS7SearchBarViewMargin, self.frame.size.width-iOS7SearchBarViewMargin*2, iOS7SearchBarContentHeight)];
+        LF_iOS7SearchBarTextField *textField = [[LF_iOS7SearchBarTextField alloc] initWithFrame:CGRectMake(iOS7SearchBarViewMargin, iOS7SearchBarViewMargin, self.frame.size.width-iOS7SearchBarViewMargin*2, self.frame.size.height - iOS7SearchBarViewMargin * 2)];
         textField.delegate = self;
         textField.borderStyle = UITextBorderStyleNone;
         textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
