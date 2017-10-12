@@ -12,6 +12,8 @@
 
 @interface LF_iOS7SearchBarTextField : UITextField
 
+@property (nonatomic, assign) BOOL contentLeft;
+
 @end
 
 @implementation LF_iOS7SearchBarTextField
@@ -20,7 +22,7 @@
 {
     CGRect textRect = [super placeholderRectForBounds:bounds];
     
-    if (!(self.editing || self.text.length || self.attributedText.length)) {
+    if (!(self.editing || self.text.length || self.attributedText.length || self.contentLeft)) {
         CGFloat width = [self.attributedPlaceholder boundingRectWithSize:bounds.size options:NSStringDrawingUsesFontLeading context:nil].size.width;
         textRect.origin.x = (bounds.size.width - width) / 2;
     }
@@ -32,7 +34,7 @@
 {
     CGRect viewRect = [super leftViewRectForBounds:bounds];
     
-    if (!(self.editing || self.text.length || self.attributedText.length)) {
+    if (!(self.editing || self.text.length || self.attributedText.length || self.contentLeft)) {
         CGFloat width = [self.attributedPlaceholder boundingRectWithSize:bounds.size options:NSStringDrawingUsesFontLeading context:nil].size.width;
         viewRect.origin.x = (bounds.size.width - width) / 2 - viewRect.size.width;
     }
@@ -282,6 +284,16 @@ static const float iOS7SearchBarDefaultHeight_H = 32.f;
     return self.textField.backgroundColor;
 }
 
+- (void)setBarTintColor:(UIColor *)barTintColor
+{
+    self.textField.layer.borderColor = barTintColor.CGColor;
+}
+
+- (UIColor *)barTintColor
+{
+    return [UIColor colorWithCGColor:self.textField.layer.borderColor];
+}
+
 - (void)setIconImage:(UIImage *)iconImage
 {
     _iconImage = iconImage;
@@ -330,6 +342,12 @@ static const float iOS7SearchBarDefaultHeight_H = 32.f;
 -(void)setInputAccessoryView:(UIView *)inputAccessoryView{
     _inputAccessoryView = inputAccessoryView;
     _textField.inputAccessoryView = inputAccessoryView;
+}
+
+- (void)setContentLeft:(BOOL)contentLeft
+{
+    _contentLeft = contentLeft;
+    self.textField.contentLeft = contentLeft;
 }
 
 #pragma mark - overwrite

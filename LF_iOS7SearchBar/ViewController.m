@@ -32,7 +32,10 @@
     navi_searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth |UIViewAutoresizingFlexibleHeight;
     navi_searchBar.placeholder = @"搜索";
     navi_searchBar.delegate = self;
-//    navi_searchBar.backgroundColor = [UIColor clearColor];
+    navi_searchBar.backgroundColor = [UIColor clearColor];
+    navi_searchBar.barTintColor = [UIColor clearColor];
+    navi_searchBar.tintColor = [UIColor clearColor];
+    navi_searchBar.contentLeft = YES;
     self.navigationItem.titleView = navi_searchBar;
     
 }

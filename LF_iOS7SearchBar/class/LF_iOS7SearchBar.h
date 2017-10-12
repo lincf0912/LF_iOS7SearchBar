@@ -25,10 +25,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nullable,nonatomic,copy)   NSString               *placeholder;           // default is nil
 @property(nonatomic)        BOOL                    showsCancelButton;     // default is NO
 @property(nullable,nonatomic,copy)   NSString               *cancelTitle;
+@property(nonatomic)        BOOL                    contentLeft; // The placeholder content displayed on the left. default is NO
 
 - (void)setShowsCancelButton:(BOOL)showsCancelButton animated:(BOOL)animated;
 
 @property(null_resettable, nonatomic,strong) UIColor *tintColor;
+@property(nullable, nonatomic,strong) UIColor *barTintColor;
 
 /* Allow placement of an input accessory view to the keyboard for the search bar
  */
