@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "MyTalbeViewController.h"
+
 #import "LF_iOS7SearchBar.h"
 
 @interface ViewController () <LF_iOS7SearchBarDelegate>
@@ -38,6 +40,13 @@
     navi_searchBar.contentLeft = YES;
     self.navigationItem.titleView = navi_searchBar;
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"TableView" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonAction)];
+}
+
+- (void)rightBarButtonAction
+{
+    MyTalbeViewController *tableVC = [[MyTalbeViewController alloc] init];
+    [self.navigationController pushViewController:tableVC animated:YES];
 }
 
 - (BOOL)lf_iOS7SearchBarShouldBeginEditing:(LF_iOS7SearchBar *)searchBar

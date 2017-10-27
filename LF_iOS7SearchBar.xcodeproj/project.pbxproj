@@ -15,6 +15,7 @@
 		6F9F32C51F7DDB0C004B6438 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9F32C41F7DDB0C004B6438 /* main.m */; };
 		6F9F32CE1F7DDB3A004B6438 /* LF_iOS7SearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9F32CD1F7DDB3A004B6438 /* LF_iOS7SearchBar.m */; };
 		6F9F32D01F7DE696004B6438 /* LF_iOS7SearchBar.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F9F32CF1F7DE692004B6438 /* LF_iOS7SearchBar.bundle */; };
+		6FA4D6A71F99E454002E4B9E /* MyTalbeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA4D6A61F99E454002E4B9E /* MyTalbeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,8 @@
 		6F9F32CC1F7DDB3A004B6438 /* LF_iOS7SearchBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LF_iOS7SearchBar.h; sourceTree = "<group>"; };
 		6F9F32CD1F7DDB3A004B6438 /* LF_iOS7SearchBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LF_iOS7SearchBar.m; sourceTree = "<group>"; };
 		6F9F32CF1F7DE692004B6438 /* LF_iOS7SearchBar.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LF_iOS7SearchBar.bundle; sourceTree = "<group>"; };
+		6FA4D6A51F99E454002E4B9E /* MyTalbeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTalbeViewController.h; sourceTree = "<group>"; };
+		6FA4D6A61F99E454002E4B9E /* MyTalbeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTalbeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +71,8 @@
 				6F9F32B61F7DDB0C004B6438 /* AppDelegate.m */,
 				6F9F32B81F7DDB0C004B6438 /* ViewController.h */,
 				6F9F32B91F7DDB0C004B6438 /* ViewController.m */,
+				6FA4D6A51F99E454002E4B9E /* MyTalbeViewController.h */,
+				6FA4D6A61F99E454002E4B9E /* MyTalbeViewController.m */,
 				6F9F32BB1F7DDB0C004B6438 /* Main.storyboard */,
 				6F9F32BE1F7DDB0C004B6438 /* Assets.xcassets */,
 				6F9F32C01F7DDB0C004B6438 /* LaunchScreen.storyboard */,
@@ -162,6 +167,7 @@
 				6F9F32BA1F7DDB0C004B6438 /* ViewController.m in Sources */,
 				6F9F32C51F7DDB0C004B6438 /* main.m in Sources */,
 				6F9F32B71F7DDB0C004B6438 /* AppDelegate.m in Sources */,
+				6FA4D6A71F99E454002E4B9E /* MyTalbeViewController.m in Sources */,
 				6F9F32CE1F7DDB3A004B6438 /* LF_iOS7SearchBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
