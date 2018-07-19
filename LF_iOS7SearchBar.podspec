@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 s.name         = 'LF_iOS7SearchBar'
-s.version      = '1.0.3'
+s.version      = '1.0.4'
 s.summary      = 'LF_iOS7SearchBar, Custom SearchBar like iOS7\'s UISearchBar'
 s.homepage     = 'https://github.com/lincf0912/LF_iOS7SearchBar'
 s.license      = 'MIT'
