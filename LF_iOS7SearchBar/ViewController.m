@@ -38,6 +38,7 @@
     navi_searchBar.barTintColor = [UIColor clearColor];
     navi_searchBar.tintColor = [UIColor clearColor];
     navi_searchBar.contentLeft = YES;
+    navi_searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
     self.navigationItem.titleView = navi_searchBar;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"TableView" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonAction)];

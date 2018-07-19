@@ -9,6 +9,18 @@
 
 #import "LF_iOS7SearchBar.h"
 
+#define lf_iOS7SearchBarPickerifyGetterMothed(__type, __name) \
+- (__type)__name   \
+{   \
+return [self.textField __name];\
+}
+
+#define lf_iOS7SearchBarPickerifySetterMothed(__type, __name) \
+- (void)__name(__type)param   \
+{  \
+[self.textField __name param]; \
+}
+
 
 @interface LF_iOS7SearchBarTextField : UITextField
 
@@ -375,5 +387,44 @@ static const float iOS7SearchBarDefaultHeight_H = 32.f;
 {
     return [self.textField isFirstResponder];
 }
+
+#pragma mark - UITextInputTraits
+
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunguarded-availability-new"
+#pragma clang diagnostic ignored "-Wunguarded-availability"
+
+lf_iOS7SearchBarPickerifyGetterMothed(UITextAutocapitalizationType, autocapitalizationType)
+lf_iOS7SearchBarPickerifySetterMothed(UITextAutocapitalizationType, setAutocapitalizationType:)
+
+lf_iOS7SearchBarPickerifyGetterMothed(UITextAutocorrectionType, autocorrectionType)
+lf_iOS7SearchBarPickerifySetterMothed(UITextAutocorrectionType, setAutocorrectionType:)
+
+lf_iOS7SearchBarPickerifyGetterMothed(UITextSpellCheckingType, spellCheckingType)
+lf_iOS7SearchBarPickerifySetterMothed(UITextSpellCheckingType, setSpellCheckingType:)
+
+lf_iOS7SearchBarPickerifyGetterMothed(UITextSmartQuotesType, smartQuotesType)
+lf_iOS7SearchBarPickerifySetterMothed(UITextSmartQuotesType, setSmartQuotesType:)
+
+lf_iOS7SearchBarPickerifyGetterMothed(UITextSmartDashesType, smartDashesType)
+lf_iOS7SearchBarPickerifySetterMothed(UITextSmartDashesType, setSmartDashesType:)
+
+lf_iOS7SearchBarPickerifyGetterMothed(UITextSmartInsertDeleteType, smartInsertDeleteType)
+lf_iOS7SearchBarPickerifySetterMothed(UITextSmartInsertDeleteType, setSmartInsertDeleteType:)
+
+lf_iOS7SearchBarPickerifyGetterMothed(UIKeyboardType, keyboardType)
+lf_iOS7SearchBarPickerifySetterMothed(UIKeyboardType, setKeyboardType:)
+
+lf_iOS7SearchBarPickerifyGetterMothed(BOOL, enablesReturnKeyAutomatically)
+lf_iOS7SearchBarPickerifySetterMothed(BOOL, setEnablesReturnKeyAutomatically:)
+
+lf_iOS7SearchBarPickerifyGetterMothed(BOOL, isSecureTextEntry)
+lf_iOS7SearchBarPickerifySetterMothed(BOOL, setSecureTextEntry:)
+
+lf_iOS7SearchBarPickerifyGetterMothed(UITextContentType, textContentType)
+lf_iOS7SearchBarPickerifySetterMothed(UITextContentType, setTextContentType:)
+
+#pragma clang diagnostic pop
 
 @end
